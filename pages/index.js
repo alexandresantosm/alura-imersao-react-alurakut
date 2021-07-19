@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import Prismic from '@prismicio/client'
+import nookies from 'nookies'
+import jwt from 'jsonwebtoken'
 
 import { Box } from '../src/components/Box'
 import { MainGrid } from '../src/components/MainGrid'
@@ -47,11 +49,11 @@ function ProfileRelationsBox(props) {
   )
 }
 
-export default function Home() {
+export default function Home(props) {
   const [communities, setCommunities] = useState([])
   const [followers, setFollowers] = useState([])
 
-  const githubUser = 'alexandresantosm'
+  const githubUser = props.githubUser
   const favoritePeople = [
     'juunegreiros',
     'omariosouto',
@@ -197,4 +199,35 @@ export default function Home() {
       </MainGrid>
     </>
   )
+}
+
+export async function getServerSideProps(cxt) {
+  const cookies = nookies.get(cxt)
+  const token = cookies.USER_TOKEN
+
+  const { isAuthenticated } = await fetch(
+    'https://alurakut.vercel.app/api/auth',
+    {
+      headers: {
+        Authorization: token
+      }
+    }
+  ).then(response => response.json())
+
+  if (!isAuthenticated) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false
+      }
+    }
+  }
+
+  const { githubUser } = jwt.decode(token)
+
+  return {
+    props: {
+      githubUser
+    }
+  }
 }
