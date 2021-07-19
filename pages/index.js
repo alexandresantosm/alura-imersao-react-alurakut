@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import Prismic from '@prismicio/client'
 
 import { Box } from '../src/components/Box'
 import { MainGrid } from '../src/components/MainGrid'
@@ -8,6 +9,8 @@ import {
   AlurakutProfileSidebarMenuDefault,
   OrkutNostalgicIconSet
 } from '../src/lib/AlurakutCommons'
+
+import { getPrismicClient } from '../src/services/prismic'
 
 function ProfileSidebar(props) {
   return (
@@ -34,17 +37,19 @@ function ProfileSidebar(props) {
   )
 }
 
+function ProfileRelationsBox(props) {
+  return (
+    <ProfileRelationsBoxWrapper>
+      <h2 className="smallTitle">
+        {props.title} ({props.items.length})
+      </h2>
+    </ProfileRelationsBoxWrapper>
+  )
+}
+
 export default function Home() {
-  const [communities, setCommunities] = useState([
-    {
-      title: 'Alurakut',
-      image: 'https://i.ytimg.com/vi/5vmPPJh7Ww8/maxresdefault.jpg'
-    },
-    {
-      title: 'Eu odeio acordar cedo',
-      image: 'https://pbs.twimg.com/profile_images/143696361/avatar_400x400.jpg'
-    }
-  ])
+  const [communities, setCommunities] = useState([])
+  const [followers, setFollowers] = useState([])
 
   const githubUser = 'alexandresantosm'
   const favoritePeople = [
@@ -55,6 +60,45 @@ export default function Home() {
     'marcobrunodev',
     'felipefialho'
   ]
+
+  useEffect(async () => {
+    const followersResponse = await fetch(
+      `https://api.github.com/users/${githubUser}/followers`
+    )
+    const followersList = await followersResponse.json()
+
+    setFollowers(followersList)
+  }, [])
+
+  useEffect(async () => {
+    const prismic = getPrismicClient()
+
+    const response = await prismic.query(
+      [Prismic.predicates.at('document.type', 'community')],
+      {
+        fetch: [
+          'community.uid',
+          'community.title',
+          'community.image_url',
+          'community.creator_slug'
+        ],
+        pageSize: 100
+      }
+    )
+
+    let communityList = []
+    if (response) {
+      response.results.map(item => {
+        communityList.push({
+          id: item.id,
+          title: item.data.title[0].text,
+          image: item.data.image_url[0].text,
+          creator_slug: item.data.creator_slug[0].text
+        })
+      })
+    }
+    setCommunities(communityList)
+  }, [])
 
   function handleCreateComunity(event) {
     event.preventDefault()
@@ -111,6 +155,7 @@ export default function Home() {
           className="profileRelationsArea"
           style={{ gridArea: 'profileRelationsArea' }}
         >
+          <ProfileRelationsBox title="Seguidores" items={followers} />
           <ProfileRelationsBoxWrapper>
             <h2 className="smallTitle">
               Meus amigos ({favoritePeople.length})
