@@ -1,84 +1,79 @@
-# Example app with styled-components
+<p align="center">
+  <img alt="Upfi" src="./public/images/logo.svg" width="160px" />
+</p>
 
-This example features how you use a different styling solution than [styled-jsx](https://github.com/vercel/styled-jsx) that also supports universal styles. That means we can serve the required styles for the first render within the HTML and then load the rest in the client. In this case we are using [styled-components](https://github.com/styled-components/styled-components).
+<p align="center">
+  <img src="https://img.shields.io/static/v1?label=Upfi&message=1.0&color=D81D99&labelColor=000000" alt="Alurakut" />
 
-For this purpose we are extending the `<Document />` and injecting the server side rendered styles into the `<head>`, and also adding the `babel-plugin-styled-components` (which is required for server side rendering). Additionally we set up a global [theme](https://www.styled-components.com/docs/advanced#theming) for styled-components using NextJS custom [`<App>`](https://nextjs.org/docs/advanced-features/custom-app) component.
+  <img src="https://img.shields.io/github/stars/alexandresantosm/letmeask?label=stars&message=MIT&color=D81D99&labelColor=000000" alt="Stars" />
 
-## Preview
+  <img  src="https://img.shields.io/static/v1?label=license&message=MIT&color=D81D99&labelColor=000000" alt="License">
+</p>
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+<h1 align="center">
+  <img alt="Alurakut" src=".github/home-desktop.PNG" />
+</h1>
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-styled-components)
+<br>
 
-## Deploy your own
+## 🧪 Tecnologias
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+Este projeto foi desenvolvido durante a Imersão React da [Alura](https://www.alura.com.br), que ocorreu no período de 12 a 16 de junho de 2021.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-styled-components&project-name=with-styled-components&repository-name=with-styled-components)
+A aplicação desenvolvida utiliza as seguintes tecnologias:
 
-## How to use
+- [Next.js](https://nextjs.org)
+- [Prismic](https://prismic.io)
+- [Styled Components](https://styled-components.com)
+- [Nookies](https://www.npmjs.com/package/nookies)
+- [Json Web Token](https://www.npmjs.com/package/jsonwebtoken)
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+<br>
 
-```bash
-npx create-next-app --example with-styled-components with-styled-components-app
-# or
-yarn create next-app --example with-styled-components with-styled-components-app
-```
+## 🎨 Projeto
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+Alurakut é uma aplicação repaginada do nostalgico orkut.
 
-### Try it on CodeSandbox
+<br>
 
-[Open this example on CodeSandbox](https://codesandbox.io/s/github/vercel/next.js/tree/canary/examples/with-styled-components)
+## ✅ Demonstração da aplicação
 
-### Notes
+## 📱 Mobile
 
-When wrapping a [Link](https://nextjs.org/docs/api-reference/next/link) from `next/link` within a styled-component, the [as](https://styled-components.com/docs/api#as-polymorphic-prop) prop provided by `styled` will collide with the Link's `as` prop and cause styled-components to throw an `Invalid tag` error. To avoid this, you can either use the recommended [forwardedAs](https://styled-components.com/docs/api#forwardedas-prop) prop from styled-components or use a different named prop to pass to a `styled` Link.
+<p>Página de Login</p>
 
-<details>
-<summary>Click to expand workaround example</summary>
-<br />
+<p align="center">
+  <img alt="Alurakut" src=".github/login-mobile.PNG" />
+</p>
 
-**components/StyledLink.js**
+<p>Página Home</p>
 
-```javascript
-import Link from 'next/link'
-import styled from 'styled-components'
+<p align="center">
+  <img alt="Alurakut" src=".github/home-mobile.PNG" />
+</p>
 
-const StyledLink = ({ as, children, className, href }) => (
-  <Link href={href} as={as} passHref>
-    <a className={className}>{children}</a>
-  </Link>
-)
+<br>
 
-export default styled(StyledLink)`
-  color: #0075e0;
-  text-decoration: none;
-  transition: all 0.2s ease-in-out;
+## 💻 Desktop
 
-  &:hover {
-    color: #40a9ff;
-  }
+<p>Página de Login</p>
 
-  &:focus {
-    color: #40a9ff;
-    outline: none;
-    border: 0;
-  }
-`
-```
+<p align="center">
+  <img alt="Alurakut" src=".github/login-desktop.PNG" />
+</p>
 
-**pages/index.js**
+<p>Página Home</p>
 
-```javascript
-import StyledLink from '../components/StyledLink'
+<p align="center">
+  <img alt="Alurakut" src=".github/home-desktop.PNG" />
+</p>
 
-export default () => (
-  <StyledLink href="/post/[pid]" forwardedAs="/post/abc">
-    First post
-  </StyledLink>
-)
-```
+<br>
 
-</details>
+## 📝 License
+
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
+
+---
+
+Feito com 💜 by Alexandre 👋🏻
