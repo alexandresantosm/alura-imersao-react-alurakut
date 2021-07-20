@@ -21,7 +21,7 @@
 
 <h2 style="color: #D81D99">🧪 Tecnologias</h2>
 
-<span style="color: black">Este projeto foi desenvolvido durante a Imersão React da </span>[Alura](https://www.alura.com.br)<span  style="color: black">, que ocorreu no período de 12 a 16 de junho de 2021.</span>
+<span style="color: black">Este projeto foi desenvolvido durante a Imersão React da </span>[Alura](https://www.alura.com.br)<span  style="color: black">, que ocorreu no período de 12 a 16 de julho de 2021.</span>
 
 <p style="color: black">A aplicação desenvolvida utiliza as seguintes tecnologias:</p>
 
